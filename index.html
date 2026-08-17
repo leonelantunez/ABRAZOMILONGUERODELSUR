@@ -530,6 +530,42 @@
             font-style: italic;
         }
 
+        /* Estilos de la lista de horarios en clases */
+        .horarios-list {
+            margin: 4px 0 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .horario-item {
+            background: rgba(242,231,213,0.04);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .horario-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .horario-hora {
+            font-size: 13px;
+            color: var(--paper);
+            font-weight: 500;
+        }
+
+        .horario-detalle {
+            font-size: 12.5px;
+            color: var(--paper-dim);
+            margin-top: 2px;
+        }
+
         .actions {
             display: flex;
             flex-wrap: wrap;
@@ -715,6 +751,174 @@
             .follow {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* ---------- ADMIN PANEL (oculto) ---------- */
+        .admin-trigger {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            opacity: 0.15;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .admin-trigger:hover { opacity: 0.5; }
+
+        .admin-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(20,16,13,0.72);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            padding: 24px;
+            overflow-y: auto;
+        }
+        .admin-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+
+        .admin-box {
+            background: var(--night-2);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 420px;
+            padding: 28px;
+            margin-top: 60px;
+        }
+        .admin-box.wide { max-width: 860px; }
+
+        .admin-box h2 { font-size: 22px; margin-bottom: 6px; }
+        .admin-box p.sub-admin { color: var(--paper-dim); font-size: 13.5px; margin-bottom: 18px; }
+
+        .admin-close {
+            float: right;
+            background: none;
+            border: 1px solid var(--line);
+            color: var(--paper-dim);
+            border-radius: 8px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .admin-close:hover { color: var(--paper); border-color: var(--paper-dim); }
+
+        .admin-field { margin-bottom: 14px; }
+        .admin-field label {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--amber);
+            margin-bottom: 6px;
+        }
+        .admin-field input,
+        .admin-field select,
+        .admin-field textarea {
+            width: 100%;
+            background: var(--night);
+            border: 1px solid var(--line);
+            color: var(--paper);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 14px;
+        }
+        .admin-field textarea { min-height: 64px; resize: vertical; }
+        .admin-field small { display:block; color: var(--steel); font-size: 11.5px; margin-top: 4px; }
+
+        .admin-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .admin-error {
+            color: #e9967a;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .admin-tabs { display: flex; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
+        .admin-tab {
+            background: none;
+            border: none;
+            color: var(--paper-dim);
+            padding: 10px 4px;
+            cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-bottom: 2px solid transparent;
+            margin-right: 14px;
+        }
+        .admin-tab.active { color: var(--paper); border-bottom-color: var(--amber); }
+
+        .admin-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px; flex-wrap: wrap; }
+
+        .admin-list { display: grid; gap: 8px; max-height: 46vh; overflow-y: auto; margin-bottom: 4px; }
+        .admin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: var(--night);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+        .admin-item-info strong { display: block; font-size: 14px; }
+        .admin-item-info span { display: block; font-size: 12px; color: var(--paper-dim); }
+        .admin-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+        .admin-btn {
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--paper);
+            padding: 8px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .admin-btn:hover { border-color: var(--paper-dim); }
+        .admin-btn.primary { background: var(--amber); border-color: var(--amber); }
+        .admin-btn.primary:hover { background: #8e5837; }
+        .admin-btn.danger { color: #e9967a; border-color: rgba(233,150,122,0.4); }
+        .admin-btn.danger:hover { background: rgba(233,150,122,0.12); }
+        .admin-btn.small { padding: 6px 10px; font-size: 12px; }
+
+        .admin-horarios-list { display: grid; gap: 10px; margin-bottom: 10px; }
+        .admin-horario-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 8px;
+            align-items: start;
+            background: var(--night);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        @media (max-width: 700px) {
+            .admin-horario-row { grid-template-columns: 1fr 1fr; }
+            .admin-row2 { grid-template-columns: 1fr; }
+        }
+
+        .admin-form-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+
+        .admin-export-box textarea {
+            width: 100%;
+            min-height: 260px;
+            background: var(--night);
+            color: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            padding: 12px;
         }
     </style>
 </head>
@@ -914,1157 +1118,196 @@
 
     <footer>
         <div class="wrap">
-            <span>Abrazo Milonguero del Sur — directorio hecho por y para la comunidad milonguera del sur.</span>
+            <span>Abrazo Milonguero del Sur — directorio hecho por y para la comunidad milonguera del sur.<button class="admin-trigger" id="adminTrigger" aria-label="admin" title=""></button></span>
             <a href="https://www.instagram.com/abrazomilonguerodelsur/" target="_blank" rel="noopener">Instagram ↗</a>
         </div>
     </footer>
 
-    <script>
-        /* =========================================================================
-           MILONGAS_DATA
-        ========================================================================== */
-        const MILONGAS_DATA = [
-            // AVELLANEDA
-            {
-                nombre: "Milonga Gente de Arte",
-                barrio: "Avellaneda",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-09-12",
-                horario: "Desde las 20:00 a 02:00 hs",
-                direccion: "Alsina 234, Avellaneda",
-                nota: "Sábado 12 de Septiembre / Entrada: $10.000 / Orquesta en vivo: Modelo Tango",
-                contacto: "5491168639389"
-            },
-            {
-                nombre: "Milonga \"La Teresita\"",
-                barrio: "Avellaneda",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-15",
-                horario: "Desde las 20:00 hs",
-                direccion: "San Lorenzo 235, Sarandí, Avellaneda",
-                nota: "Sábado 15 de agosto / Entrada anticipada: $5.000 / Entrada en puerta: $7.000 / Música en vivo: Dúo Barca y Sexteto El Alba / Cantante invitado: Ignacio Martínez / Buffet y barra popular / Feria autogestiva / Espacio para niñeces",
-                contacto: ""
-            },
-            {
-                nombre: "A la Milonga - Alas del Sur",
-                barrio: "Avellaneda",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-15",
-                horario: "Desde las 20:30 hs",
-                direccion: "Supisiche 798, Sarandí",
-                nota: "Sábado 15 de agosto / Entrada: $6.000 / Clase abierta a cargo de Rosaura Lila / Cierre musical: Lara y Tobi",
-                contacto: "5491168339219"
-            },
-            {
-                nombre: "Milonga Mirando al Sur",
-                barrio: "Avellaneda",
-                dia: "Domingo",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-16",
-                horario: " ",
-                direccion: "Av. Bartolomé Mitre 100 esq. Hipólito Yrigoyen, Avellaneda",
-                nota: "Con clase previa Moni Linares. A la gorra. Retoma el 16 de agosto (10 años). Al aire libre (se suspende por lluvia).",
-                contacto: "5491127070369"
-            },
-            {
-                nombre: "Milonga del Bicentenario",
-                barrio: "Avellaneda",
-                dia: "Sábado",
-                frecuencia: "mensual",
-                proximaFecha: "2026-09-05",
-                horario: "21:00 a 02:00 hs",
-                direccion: "Colón y Berutti, Avellaneda",
-                nota: "1er sábado de cada mes. Entrada $5000 (incluye clase). Música en vivo.",
-                contacto: ""
-            },
-            {
-                nombre: "La Vitrola",
-                barrio: "Sarandí",
-                dia: "Domingo",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-16",
-                horario: "No especificado",
-                direccion: "Sueños de Colores, Av. Manuel Belgrano 2865, Sarandí",
-                nota: "Suspendida. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "La Mística Milonga",
-                barrio: "Sarandí",
-                dia: "Viernes",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-14",
-                horario: "21:00 hs",
-                direccion: "Lafayette 770, Sarandí",
-                nota: "2do viernes del mes. Entrada: $5000. Org: Melisa Zadiz y Malena Palomares.",
-                contacto: "5491168339219"
-            },
-            {
-                nombre: "La que toca, también baila",
-                barrio: "Crucecita",
-                dia: "Viernes",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-07-17",
-                horario: "Milonga 21:30 hs / Clase 22:00 hs",
-                direccion: "Escuela de Música Popular de Avellaneda (EMPA) – Vélez Sarsfield 680, Crucecita",
-                nota: "Fecha específica (Viernes 17 de julio). Orquesta EMPA, buffet/barra, clase por Rosaura Carlino.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga del Parque Avellaneda",
-                barrio: "Villa Domínico",
-                dia: "Martes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-11",
-                horario: "19 hs hasta 00hs",
-                direccion: "Av. Mitre 4637, 1er piso, Villa Domínico",
-                nota: "Con clase previa. Entrada: $5000.",
-                contacto: "5491168021570"
-            },
-
-            // QUILMES
-            {
-                nombre: "Milonga del Mitre",
-                barrio: "Quilmes Centro",
-                dia: "Sábado",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-15",
-                horario: "No especificado",
-                direccion: "Club Social y Deportivo Mitre, Mitre 1417, Quilmes",
-                nota: "3er sábado del mes. Bono contribución: $6000 (clase incluida). Jubilados 2x1.",
-                contacto: ""
-            },
-            {
-                nombre: "Tango en Casa de la Cultura Quilmes",
-                barrio: "Quilmes Centro",
-                dia: "Miércoles",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-12",
-                horario: "18:00 hs clases | 19:00 hs pista libre | 20:30 hs música en vivo",
-                direccion: "Casa de la Cultura, Rivadavia 383, Quilmes",
-                nota: "Fecha específica. Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Loca Milonga",
-                barrio: "Quilmes Oeste",
-                dia: "Viernes",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-21",
-                horario: "20:00 hs Clase / 21:00 hs Milonga",
-                direccion: "Espacio Cultural Polaridades, Andrés Baranda 842, Quilmes Oeste",
-                nota: "Una vez al mes. Show en vivo, buffet. Anticipada: $8000 / Puerta: $10000. Reserva previa.",
-                contacto: ""
-            },
-            {
-                nombre: "Noche de Tango y Folclore – El Galpón",
-                barrio: "Quilmes Oeste",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-04-11",
-                horario: "No especificado",
-                direccion: "Av. Calchaquí 627, Quilmes",
-                nota: "Fecha específica (Sábado 11 de abril). Bono contribución $5000.",
-                contacto: ""
-            },
-            {
-                nombre: "La Milonga del Alemán",
-                barrio: "Quilmes Oeste",
-                dia: "Jueves",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-13",
-                horario: "No especificado",
-                direccion: "Quilmes Oeste",
-                nota: "Cerrado temporalmente. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga de la Plaza",
-                barrio: "Bernal",
-                dia: "Viernes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-14",
-                horario: "20:00 hs",
-                direccion: "Casa del Jubilado, Bombero Sánchez 771, Bernal",
-                nota: "Entrada: $3000 (socios sin cargo).",
-                contacto: ""
-            },
-            {
-                nombre: "La Milonga que Faltaba",
-                barrio: "Bernal",
-                dia: "Domingo",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-16",
-                horario: "No especificado",
-                direccion: "Club Alsina, Entre Ríos 350, Bernal",
-                nota: "Entrada accesible. Organizan: Aída y César.",
-                contacto: ""
-            },
-            {
-                nombre: "La Peñalonga",
-                barrio: "Bernal",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-01",
-                horario: "20:30 hs clase / 21:30 hs pista",
-                direccion: "El Rodeo – Liniers 10, Bernal",
-                nota: "Fecha específica (Sábado 1° de agosto). Tango y folklore, buffet. A la gorra.",
-                contacto: ""
-            },
-
-            // LANÚS
-            {
-                nombre: "La Granalonga Tango",
-                barrio: "Lanús Oeste",
-                dia: "Domingo",
-                frecuencia: "quincenal",
-                proximaFecha: "2026-08-16",
-                horario: "18:00 hs en adelante",
-                direccion: "Estación Lanús Oeste, H. Yrigoyen y 25 de Mayo, Lanús",
-                nota: "Fechas específicas. Entrada a la gorra.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga Del Favio",
-                barrio: "Lanús Oeste",
-                dia: "Sábado",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-08",
-                horario: "18:30 hs Clase | 19:30 hs Milonga | 21:00 hs Música en vivo",
-                direccion: "Av. 25 de mayo 131, Lanús Oeste",
-                nota: "2do sábado del mes. Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Embrujo Tango",
-                barrio: "Lanús Este",
-                dia: "Viernes",
-                frecuencia: "quincenal",
-                proximaFecha: "2026-08-14",
-                horario: "Desde las 18:00 hs",
-                direccion: "Sarmiento 1384, Lanús Este",
-                nota: "2 veces al mes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Las Cuarenta Milonga",
-                barrio: "Lanús Este",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "20:00 hs clase / 21:00 hs milonga",
-                direccion: "Coronel Pringles 860, Lanús Este",
-                nota: "Música, comida y sorteos. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "La Salazar Milonga",
-                barrio: "Valentín Alsina",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-22",
-                horario: "No especificado",
-                direccion: "Choele Choel 739 esq. Tte. Gral. Juan Domingo Perón, Valentín Alsina, Lanús",
-                nota: "Fecha específica. Entradas anticipadas.",
-                contacto: ""
-            },
-            {
-                nombre: "El Palacio del Tango",
-                barrio: "Gerli",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "18:00 a 20:00 hs",
-                direccion: "Palacios 835, Gerli Oeste",
-                nota: "Entrada: $3000.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga en Angélica Tango Club",
-                barrio: "Gerli",
-                dia: "Domingo",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-06-14",
-                horario: "20:00 a 01:30 hs",
-                direccion: "República del Líbano 363, Gerli, Lanús Este",
-                nota: "Fecha específica (Domingo 14 de junio). Socios: $3000 / Ant: $5000 / Puerta: $6000.",
-                contacto: ""
-            },
-
-            // BERAZATEGUI
-            {
-                nombre: "Buena Yunta",
-                barrio: "Berazategui",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "21:00 hs",
-                direccion: "Calle 146 e/ 11 y 12, Berazategui",
-                nota: "Entrada general: $6000. Milonga clásica, algunas fechas con orquesta en vivo.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga en La Pirca",
-                barrio: "Berazategui",
-                dia: "Jueves",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-13",
-                horario: "20:30 hs taller | 21:15 hs pista",
-                direccion: "Calle 13 N.º 4887 entre 148 y 149, Berazategui",
-                nota: "2do jueves del mes. A la gorra.",
-                contacto: ""
-            },
-
-            // FLORENCIO VARELA
-            {
-                nombre: "La Florería Milonga",
-                barrio: "Varela Centro",
-                dia: "Miércoles",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-12",
-                horario: "21:00 hs",
-                direccion: "San Juan 25, Varela Centro",
-                nota: "2do miércoles del mes. Maestros invitados, DJ, barra/gastronomía. Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga de la Casa de la Cultura – \"El Abrazo\"",
-                barrio: "Varela Centro",
-                dia: "Domingo",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-23",
-                horario: "No especificado",
-                direccion: "Plaza San Juan Bautista (25 de Mayo y Chacabuco), Florencio Varela",
-                nota: "Frecuencia mensual (fecha a confirmar). Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga de la Casa de la Cultura – \"Milonga en la Casa de Folklore\"",
-                barrio: "Barrio Presidente Sarmiento",
-                dia: "Domingo",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-30",
-                horario: "No especificado",
-                direccion: "Remedios de Escalada 1660, Florencio Varela",
-                nota: "Frecuencia mensual (fecha a confirmar). Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga de la Casa de la Cultura – \"Noche de Milonga\"",
-                barrio: "Barrio Presidente Sarmiento",
-                dia: "Domingo",
-                frecuencia: "mensual",
-                proximaFecha: "2026-09-06",
-                horario: "No especificado",
-                direccion: "Salón 9 Reinas – Remedios de Escalada 1307, Florencio Varela",
-                nota: "Frecuencia mensual (fecha a confirmar). Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga Vereda del Tango",
-                barrio: "Villa Vatteone",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "17:00 a 20:00 hs",
-                direccion: "Parque Recreativo Thevenet (Av. Thevenet y Alfonsina Storni), Villa Vatteone",
-                nota: "Entrada libre y gratuita. Al aire libre. Suspendida por receso invernal.",
-                contacto: ""
-            },
-
-            // LOMAS DE ZAMORA
-            {
-                nombre: "Milonga en La Plaza",
-                barrio: "Lomas de Zamora",
-                dia: "Domingo",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-16",
-                horario: "No especificado",
-                direccion: "H. Yrigoyen y Sáenz, Lomas de Zamora",
-                nota: "Sin anuncios recientes. A la gorra.",
-                contacto: ""
-            },
-            {
-                nombre: "La Milonguera",
-                barrio: "Lomas de Zamora",
-                dia: "Viernes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-14",
-                horario: "19:30 hs clase | 21:00 hs milonga",
-                direccion: "Díaz Vélez 368, Lomas de Zamora",
-                nota: "Entrada: $6000.",
-                contacto: ""
-            },
-            {
-                nombre: "Flor del Sur Milonga",
-                barrio: "Lomas de Zamora",
-                dia: "Sábado",
-                frecuencia: "mensual",
-                proximaFecha: "2026-09-05",
-                horario: "20:30 hs",
-                direccion: "Gorriti 1535, Lomas de Zamora",
-                nota: "1er sábado de cada mes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Punto Milonga",
-                barrio: "Lomas de Zamora",
-                dia: "Viernes",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-14",
-                horario: "20:00 hs clase | 21:00 hs milonga",
-                direccion: "Eustaquio Díaz Vélez 76, Lomas de Zamora",
-                nota: "Fecha específica. Bono contribución $5000.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonguita en Lomas de Zamora",
-                barrio: "Lomas de Zamora",
-                dia: "Miércoles",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-07-22",
-                horario: "20:30 hs",
-                direccion: "Díaz Vélez 76, Lomas de Zamora",
-                nota: "Fecha específica (Miércoles 22 de julio). Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Yunta Brava Milonga",
-                barrio: "Turdera",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "No especificado",
-                direccion: "Santa Inés 794, Turdera",
-                nota: "Sin anuncios recientes. Entrada: $6000.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga en la Plaza",
-                barrio: "Turdera",
-                dia: "Domingo",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-16",
-                horario: "No especificado",
-                direccion: "Plaza San Martín, Turdera",
-                nota: "Sin anuncios recientes. A la gorra.",
-                contacto: ""
-            },
-            {
-                nombre: "Cosmopolita Milonga",
-                barrio: "Llavallol",
-                dia: "Domingo",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-09",
-                horario: "19:00 hs",
-                direccion: "Pasaje Adrogué 186, Llavallol",
-                nota: "2do domingo del mes. Entrada: $5000.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga Bajo la Parra",
-                barrio: "Temperley",
-                dia: "Viernes",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-14",
-                horario: "22:00 hs clase | 23:30 hs milonga",
-                direccion: "Triunvirato 255, Temperley",
-                nota: "2do viernes del mes. Bono contribución $6000.",
-                contacto: ""
-            },
-            {
-                nombre: "La Cumparsita Milonga",
-                barrio: "Temperley",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "20:00 hs",
-                direccion: "Esmeralda 451, Temperley",
-                nota: "Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga Falucho",
-                barrio: "Temperley",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "No especificado",
-                direccion: "Esmeralda 656, Temperley",
-                nota: "Sin anuncios recientes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "MilonguEDTA",
-                barrio: "Temperley",
-                dia: "Viernes",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-21",
-                horario: "18:00 hs",
-                direccion: "Av. Hipólito Yrigoyen 10.335, Temperley",
-                nota: "Fecha específica. Entrada libre y gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Alma Milonga",
-                barrio: "Banfield",
-                dia: "Martes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-11",
-                horario: "19:30 a 21:30 hs",
-                direccion: "Vergara 1375, Banfield",
-                nota: "Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga Soñemos",
-                barrio: "Banfield",
-                dia: "Domingo",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-16",
-                horario: "No especificado",
-                direccion: "Country Club de Banfield – Belgrano 1783, Banfield",
-                nota: "También opera el 3er sábado del mes en Club Colón (Temperley). Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Michilonga",
-                barrio: "Banfield",
-                dia: "Lunes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-17",
-                horario: "20:00 a 21:00 hs Clases | 21:00 a 01:00 hs Milonga",
-                direccion: "Monociclo, Av. Hipólito Yrigoyen 6944, Banfield",
-                nota: "Entrada: $5000.",
-                contacto: "5491161506727"
-            },
-            {
-                nombre: "Milonga para Todxs – Tango Con-Sentido",
-                barrio: "Banfield",
-                dia: "Viernes",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-28",
-                horario: "20:00 hs actividad | 21:00 hs milonga",
-                direccion: "Av. Hipólito Yrigoyen 6944, Banfield",
-                nota: "Fecha específica. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Mas al Sur",
-                barrio: "Banfield",
-                dia: "Miércoles",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-12",
-                horario: "20:00 hs clase 21hs milonga)",
-                direccion: "Monociclo Club de Arte – Av. Hipólito Yrigoyen 6944, Banfield",
-                nota: "Todos los miercoles! Empanadas, descuentos en vinos, org: Mónica Linares.",
-                contacto: "5491127070369"
-            },
-            {
-                nombre: "Musicalizadores del Conurbano Sur",
-                barrio: "Banfield",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-07-25",
-                horario: "Desde las 21:00 hs",
-                direccion: "Monociclo Club de Arte – Av. Hipólito Yrigoyen 6944, Banfield",
-                nota: "Fecha específica (Sábado 25 de julio). Entrada $5000 (Promo 2x1 de 21 a 22 hs). 5 DJs en vivo.",
-                contacto: ""
-            },
-
-            // ALMIRANTE BROWN
-            {
-                nombre: "La Barunda",
-                barrio: "Adrogué",
-                dia: "Sábado",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-08",
-                horario: "22:00 a 02:00 hs",
-                direccion: "Centro Cultural Bijou – Bartolomé Mitre 995, Adrogué",
-                nota: "2do sábado del mes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga HCD",
-                barrio: "Adrogué",
-                dia: "Sábado",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-15",
-                horario: "18:30 hs",
-                direccion: "Pellerano 778, Adrogué",
-                nota: "Entrada gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "Tango en Casa de la Cultura",
-                barrio: "Adrogué",
-                dia: "Jueves",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-13",
-                horario: "19:30 hs clases, luego milonga",
-                direccion: "Esteban Adrogué 1224, Adrogué",
-                nota: "Entrada gratuita.",
-                contacto: ""
-            },
-            {
-                nombre: "La Bohemia Milonga",
-                barrio: "Adrogué",
-                dia: "Miércoles",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-12",
-                horario: "19:00 hs clases | 20:00 a 23:00 hs milonga",
-                direccion: "Sociedad Italiana de Adrogué – Rosales 1518, Adrogué",
-                nota: "2do miércoles del mes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "El Bodegón del Arrabal",
-                barrio: "Burzaco",
-                dia: "Miércoles",
-                frecuencia: "mensual",
-                proximaFecha: "2026-08-12",
-                horario: "19:00 a 23:30 hs",
-                direccion: "C. Pellegrini 788, Burzaco",
-                nota: "2do miércoles del mes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Carnaval de Mi Barrio – Milonga",
-                barrio: "Burzaco",
-                dia: "Sábado",
-                frecuencia: "quincenal",
-                proximaFecha: "2026-08-15",
-                horario: "18:00 hs clase / 19:15 hs milonga",
-                direccion: "Museo Sempere – Colón 581, Burzaco",
-                nota: "Dos sábados al mes. Buffet económico, ambiente climatizado. Org: Verónica del Valle.",
-                contacto: ""
-            },
-            {
-                nombre: "Perfume de Tango",
-                barrio: "Burzaco",
-                dia: "Viernes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-14",
-                horario: "21:00 a 01:00 hs",
-                direccion: "Adolfo Alsina 2085, Burzaco",
-                nota: "Sin anuncios recientes. Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga en Quinta Maya",
-                barrio: "Glew",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-04-18",
-                horario: "20:00 hs",
-                direccion: "Belisario Roldán 1856, Glew",
-                nota: "Fecha específica (Sábado 18 de abril). Entrada general: $6000.",
-                contacto: ""
-            },
-            {
-                nombre: "Fénix Milonga",
-                barrio: "Glew",
-                dia: "Domingo",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-07-26",
-                horario: "19:00 a 00:00 hs",
-                direccion: "Praga | Avellaneda 211, Glew",
-                nota: "Fecha específica (Domingo 26 de julio). Org: Micaela Avila y Carlos Telipko.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga Fénix",
-                barrio: "Longchamps",
-                dia: "Domingo",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-16",
-                horario: "19:00 hs",
-                direccion: "Centro de Jubilados Longchamps – Sáenz Peña 962, Longchamps",
-                nota: "Fecha específica. Entrada: $5000.",
-                contacto: ""
-            },
-            {
-                nombre: "Milongueando",
-                barrio: "Longchamps",
-                dia: "Viernes",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-14",
-                horario: "Apertura de pista: 20:00 hs",
-                direccion: "Av. Hipólito Yrigoyen 16651, B1854 Longchamps, Provincia de Buenos Aires",
-                nota: "Viernes 14 de agosto / Orquesta en vivo: La Tubatango / DJ: Fabián Schiliro / Organizan: Marita y Víctor / Buena comida 🍸 Variada barra de tragos",
-                contacto: "5491157182050"
-            },
-
-            // ESTEBAN ECHEVERRÍA
-            {
-                nombre: "Viernes de Milonga",
-                barrio: "Monte Grande",
-                dia: "Viernes",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-14",
-                horario: "20:00 hs",
-                direccion: "Salón Auditorio – 4.º piso, Edificio Municipal, Monte Grande",
-                nota: "Entrada libre y gratuita. Coord: Andrea Escudero y Fernando Turán.",
-                contacto: ""
-            },
-            {
-                nombre: "Mitrelonga",
-                barrio: "Monte Grande",
-                dia: "Miércoles",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-12",
-                horario: "19:00 a 22:00 hs",
-                direccion: "Cardeza 170, Monte Grande Centro",
-                nota: "A la gorra.",
-                contacto: ""
-            },
-            {
-                nombre: "Loca Milonga Bs. As.",
-                barrio: "Monte Grande",
-                dia: "Miércoles",
-                frecuencia: "quincenal",
-                proximaFecha: "2026-08-12",
-                horario: "21:00 hs",
-                direccion: "La Pulpería MG – Dardo Rocha 396, Monte Grande",
-                nota: "Sin anuncios recientes. 2.º y 4.º miércoles del mes. A la gorra consciente.",
-                contacto: ""
-            },
-            {
-                nombre: "Chicana Milonga",
-                barrio: "Monte Grande",
-                dia: "Viernes",
-                frecuencia: "quincenal",
-                proximaFecha: "2026-08-14",
-                horario: "20:30 hs clase | 21:00 hs milonga",
-                direccion: "Chimondegui 175, Monte Grande",
-                nota: "Quincenal. Entrada: $6000. Buffet popular.",
-                contacto: ""
-            },
-            {
-                nombre: "Noche DEMilonga",
-                barrio: "Monte Grande",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-08",
-                horario: "20:00 hs clase / 21:00 hs pista / 23:00 hs Orquesta",
-                direccion: "Mariano Acosta 230, Monte Grande",
-                nota: "Fecha específica (Sábado 8 de agosto). Orquesta La D'Antesca. Ant: $10000 / Puerta: $12000.",
-                contacto: ""
-            },
-            {
-                nombre: "Milonga a Beneficio – ARSIS",
-                barrio: "Monte Grande",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-06-06",
-                horario: "20:30 hs clase / 21:30 hs milonga / 23:00 hs show",
-                direccion: "Club de Leones – 9 de Abril 222, Monte Grande",
-                nota: "Fecha específica (Sábado 6 de junio). Ant: $7000 / Puerta: $10000. Show en vivo y clase.",
-                contacto: ""
-            },
-            {
-                nombre: "Una Loca Milonga",
-                barrio: "Monte Grande",
-                dia: "Sábado",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-19",
-                horario: "Desde las 20:00 hs",
-                direccion: "Dardo Rocha 596, Monte Grande",
-                nota: "Miércoles 19 de agosto / Musicaliza: DJ Stefy / La Pulpe",
-                contacto: ""
-            },
-            {
-                nombre: "La Maurilonga",
-                barrio: "Luis Guillón",
-                dia: "Jueves",
-                frecuencia: "semanal",
-                proximaFecha: "2026-08-13",
-                horario: "20:00 hs clase / 21:00 hs milonga / 00:30 hs cierre",
-                direccion: "Fader 628 esq. Boulevard Buenos Aires, Luis Guillón",
-                nota: "Entrada general: $5000 (incluye clase + milonga).",
-                contacto: ""
-            },
-
-            // SAN VICENTE
-            {
-                nombre: "Gran Milonga \"Tango y algo más\"",
-                barrio: "Alejandro Korn",
-                dia: "Domingo",
-                frecuencia: "fecha_unica",
-                proximaFecha: "2026-08-09",
-                horario: "19:00 a 23:00 hs",
-                direccion: "Centro de Jubilados A. Korn – Colón 275, Alejandro Korn",
-                nota: "Domingo 9 de agosto / Entrada: Consultar / Orquesta en vivo: Los Reyes del Tango / Organizan: Alejandra Bonetti y Fabián Sánchez",
-                contacto: "5491161506727"
-            }
-        ];
-
-        /* =========================================================================
-           CLASES_DATA
-        ========================================================================== */
-        const CLASES_DATA = [
-            {
-                nombre: "Abrazo de Tango",
-                barrio: "Sarandí",
-                dia: "Martes",
-                Tipo: "Individuales / Grupales",
-                frecuencia: "semanal",
-                franja_horaria: "20:00 hs",
-                direccion: "Brandsen 2650, Sarandí",
-                Descripcion: "Maestro Franco / todos los niveles / solo o en pareja",
-                contacto: "5491162243998"
-            },
-            {
-                nombre: "Clases de tango en el Colon",
-                barrio: "Temperley",
-                dia: "Miércoles",
-                Tipo: "Grupal",
-                frecuencia: "semanal",
-                franja_horaria: "20:30 hs",
-                direccion: "Av. Eva Perón esquina Colón, Temperley",
-                Descripcion: "Nadia Lucero y Agustina Vallejos / nivel inicial e intermedio con o sin pareja",
-                contacto: ""
-            },
-            {
-                nombre: "Tango en Gerli",
-                barrio: "Gerli",
-                dia: "Jueves",
-                Tipo: "Clase + Práctica",
-                frecuencia: "semanal",
-                franja_horaria: "18:30 a 22:00 hs",
-                direccion: "Club Los Rojos, Lucena 971, Gerli",
-                Descripcion: "Profe: Monica Linares. Entrada libre y gratuita.",
-                contacto: "5491127070369"
-            },
-            {
-                nombre: "La Práctica Abrazarte",
-                barrio: "Gerli",
-                dia: "Viernes",
-                Tipo: "Clase + Práctica",
-                frecuencia: "mensual",
-                franja_horaria: "19:15 hs Clase | 20:30 hs Práctica",
-                direccion: "C. C. Matute - Sarmiento 2102, Gerli",
-                Descripcion: "1er viernes del mes. Clase $5000 | Práctica $3000. Org: Natalia y Gonzalo.",
-                contacto: "5491161861044"
-            },
-            {
-                nombre: "Terapia de Tango",
-                barrio: "Gerli",
-                dia: "Martes",
-                Tipo: "Clases",
-                frecuencia: "semanal",
-                franja_horaria: "16:30 hs",
-                direccion: "Carabelas 1560, Gerli",
-                Descripcion: "Entrada: consultar.",
-                contacto: ""
-            },
-            {
-                nombre: "Práctica de Tango – Auditorio Hugo Del Carril",
-                barrio: "Lanús Oeste",
-                dia: "Viernes",
-                Tipo: "Clase + Práctica",
-                frecuencia: "mensual",
-                franja_horaria: "18:30 hs Clase / 19:30 a 21:00 hs Práctica",
-                direccion: "Auditorio Hugo del Carril – Palacio Municipal, Av. Hipólito Yrigoyen 3863, Lanús Oeste",
-                Descripcion: "3er viernes del mes. Música en vivo 20:00 hs. Actividad gratuita sin inscripción.",
-                contacto: ""
-            },
-            {
-                nombre: "La Morocha Martínez – Tardes de Tango",
-                barrio: "Remedios de Escalada",
-                dia: "Martes",
-                Tipo: "Clases",
-                frecuencia: "semanal",
-                franja_horaria: "17:00 a 19:00 hs",
-                direccion: "Juan de Garay 257, Remedios de Escalada",
-                Descripcion: "Coordina: Fabiana Martínez.",
-                contacto: ""
-            }
-        ];
-
-        /* =========================================================================
-           LÓGICA Y MANIPULACIÓN DEL DOM
-        ========================================================================== */
-        const grid = document.getElementById('grid');
-        const emptyState = document.getElementById('emptyState');
-        const barrioSelect = document.getElementById('barrioSelect');
-        const barriosStrip = document.getElementById('barriosStrip');
-
-        const clasesGrid = document.getElementById('clasesGrid');
-        const clasesEmptyState = document.getElementById('clasesEmptyState');
-        const claseBarrioSelect = document.getElementById('claseBarrioSelect');
-
-        // Detección automática del día actual de la semana
-        const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-        const hoyIndice = new Date().getDay();
-        const hoyNombre = diasSemana[hoyIndice];
-
-        // Estado de Filtros para Milongas (Día actual por defecto)
-        let currentDay = hoyNombre;
-        let currentBarrio = 'todos';
-
-        // Estado de Filtros para Clases (Día actual por defecto)
-        let currentClaseDay = hoyNombre;
-        let currentClaseBarrio = 'todos';
-
-        // Barrios únicos de MILONGAS_DATA
-        const barriosMilongas = [...new Set(MILONGAS_DATA.map(m => m.barrio))].sort();
-
-        // Poblar select y .barrios-strip con barrios de milongas
-        barriosMilongas.forEach(b => {
-            const opt = document.createElement('option');
-            opt.value = b; 
-            opt.textContent = b;
-            barrioSelect.appendChild(opt);
-
-            const chip = document.createElement('span');
-            chip.className = 'barrio-chip';
-            chip.textContent = b;
-            chip.addEventListener('click', () => {
-                filterByBarrioAndAllDays(b);
-                document.getElementById('milongas').scrollIntoView({ behavior: 'smooth' });
-            });
-            barriosStrip.appendChild(chip);
-        });
-
-        // Barrios únicos de CLASES_DATA
-        const barriosClases = [...new Set(CLASES_DATA.map(c => c.barrio))].sort();
-        barriosClases.forEach(b => {
-            const opt = document.createElement('option');
-            opt.value = b; 
-            opt.textContent = b;
-            claseBarrioSelect.appendChild(opt);
-        });
-
-        // Filtrar por barrio específico y colocar el día en "todos" (para milongas desde barrios-strip)
-        function filterByBarrioAndAllDays(barrio) {
-            currentBarrio = barrio;
-            currentDay = 'todos';
-
-            barrioSelect.value = barrio;
-
-            document.querySelectorAll('#filtersBar .day-chip').forEach(b => {
-                if (b.dataset.day === 'todos') {
-                    b.setAttribute('aria-pressed', 'true');
-                } else {
-                    b.setAttribute('aria-pressed', 'false');
-                }
-            });
-
-            applyFilters();
-        }
-
-        function mapEmbedUrl(direccion) {
-            return `https://www.google.com/maps?q=${encodeURIComponent(direccion)}&output=embed`;
-        }
-        function directionsUrl(direccion) {
-            return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(direccion)}`;
-        }
-        function mapsSearchUrl(direccion) {
-            return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(direccion)}`;
-        }
-
-        function getFrecuenciaLabel(frecuencia, proximaFechaStr) {
-            switch(frecuencia) {
-                case 'semanal':
-                    return 'Todas las semanas';
-                case 'quincenal':
-                    return 'Cada quince días';
-                case 'mensual':
-                    return 'Todos los meses';
-                case 'fecha_unica':
-                    if (!proximaFechaStr) return 'Fecha única';
-                    const [year, month, day] = proximaFechaStr.split('-');
-                    const date = new Date(year, month - 1, day);
-                    const mesNombre = date.toLocaleDateString('es-ES', { month: 'long' });
-                    return `Solamente ${parseInt(day, 10)} de ${mesNombre}`;
-                default:
-                    return frecuencia || '';
-            }
-        }
-
-        // Helper para calcular la diferencia de días a la próxima fecha
-        // Únicamente muestra "Fecha pasada" si la frecuencia es "fecha_unica" y diffDays < 0
-        function getCountdownInfo(proximaFechaStr, frecuencia) {
-            if (!proximaFechaStr) return { text: '', esPasada: false };
-            
-            const hoy = new Date();
-            hoy.setHours(0, 0, 0, 0);
-
-            const [year, month, day] = proximaFechaStr.split('-');
-            const fechaEvento = new Date(year, month - 1, day);
-            fechaEvento.setHours(0, 0, 0, 0);
-
-            const diffTime = fechaEvento - hoy;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            if (diffDays === 0) {
-                return { text: '¡Es hoy!', esPasada: false };
-            } else if (diffDays === 1) {
-                return { text: 'Falta 1 día', esPasada: false };
-            } else if (diffDays > 1) {
-                return { text: `Faltan ${diffDays} días`, esPasada: false };
-            } else {
-                if (frecuencia === 'fecha_unica') {
-                    return { text: 'Fecha pasada', esPasada: true };
-                }
-                return { text: '', esPasada: false };
-            }
-        }
-
-        // Renderizado de tarjetas de milongas
-        function renderCards(list) {
-            grid.innerHTML = '';
-            if (list.length === 0) {
-                emptyState.style.display = 'block';
-                return;
-            }
-            emptyState.style.display = 'none';
-            list.forEach(m => {
-                const card = document.createElement('article');
-                card.className = 'milonga';
-
-                const contactoBtn = m.contacto && m.contacto.trim() !== ''
-                    ? `<a class="btn-wa" target="_blank" rel="noopener" href="https://wa.me/${m.contacto}">WhatsApp</a>`
-                    : `<span class="btn-no-wa">Sin WhatsApp</span>`;
-
-                const frecuenciaLabel = getFrecuenciaLabel(m.frecuencia, m.proximaFecha);
-                const countdown = getCountdownInfo(m.proximaFecha, m.frecuencia);
-
-                card.innerHTML = `
-            <iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              src="${mapEmbedUrl(m.direccion)}" title="Mapa de ${m.nombre}"></iframe>
-            <div class="body">
-              <h3>${m.nombre}</h3>
-              <div class="tags-row">
-                <span class="tag-day mono">${m.dia}</span>
-                <span class="tag-frecuencia mono">${frecuenciaLabel}</span>
-                ${countdown.text ? `<span class="countdown mono ${countdown.esPasada ? 'pasada' : ''}">⏱️ ${countdown.text}</span>` : ''}
-              </div>
-              <span class="barrio">${m.barrio}</span>
-              <span class="meta">${m.horario}</span>
-              <span class="addr">${m.direccion}</span>
-              ${m.nota ? `<span class="note">${m.nota}</span>` : ''}
-              <div class="actions">
-                <a class="link-btn primary" target="_blank" rel="noopener" href="${directionsUrl(m.direccion)}">Cómo llegar</a>
-                <a class="link-btn" target="_blank" rel="noopener" href="${mapsSearchUrl(m.direccion)}">Ver en Maps</a>
-                ${contactoBtn}
-              </div>
+    <!-- ================= ADMIN: LOGIN ================= -->
+    <div class="admin-overlay" id="adminLoginOverlay">
+        <div class="admin-box">
+            <button class="admin-close" id="adminLoginClose">✕</button>
+            <h2>Panel de control</h2>
+            <p class="sub-admin">Acceso restringido. Ingresá la contraseña para administrar milongas y clases.</p>
+            <div class="admin-field">
+                <label for="adminPasswordInput">Contraseña</label>
+                <input type="password" id="adminPasswordInput" autocomplete="off">
             </div>
-          `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Renderizado del Directorio de Clases
-        function renderClases(list) {
-            clasesGrid.innerHTML = '';
-            if (list.length === 0) {
-                clasesEmptyState.style.display = 'block';
-                return;
-            }
-            clasesEmptyState.style.display = 'none';
-            list.forEach(c => {
-                const card = document.createElement('article');
-                card.className = 'clase-card';
-
-                const contactoBtn = c.contacto && c.contacto.trim() !== ''
-                    ? `<a class="btn-wa" target="_blank" rel="noopener" href="https://wa.me/${c.contacto}">Consultar / Inscribirse</a>`
-                    : `<span class="btn-no-wa">Sin WhatsApp</span>`;
-
-                card.innerHTML = `
-            <iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              src="${mapEmbedUrl(c.direccion)}" title="Mapa de ${c.nombre}"></iframe>
-            <div class="body">
-              <h3>${c.nombre}</h3>
-              <div class="tags-row">
-                ${c.dia ? `<span class="tag-day mono">${c.dia}</span>` : ''}
-                <span class="tag-day mono" style="background:#342A24; border:1px solid var(--line);">${c.Tipo}</span>
-                <span class="tag-frecuencia mono">${c.frecuencia}</span>
-              </div>
-              <span class="barrio">${c.barrio}</span>
-              <span class="meta"> Horario: ${c.franja_horaria}</span>
-              <span class="addr">📍 ${c.direccion}</span>
-              ${c.Descripcion ? `<span class="note">ℹ️ ${c.Descripcion}</span>` : ''}
-              <div class="actions">
-                <a class="link-btn primary" target="_blank" rel="noopener" href="${directionsUrl(c.direccion)}">Cómo llegar</a>
-                ${contactoBtn}
-              </div>
+            <p class="admin-error" id="adminLoginError">Contraseña incorrecta.</p>
+            <div class="admin-form-actions">
+                <button class="admin-btn primary" id="adminLoginSubmit">Entrar</button>
             </div>
-          `;
-                clasesGrid.appendChild(card);
-            });
-        }
+        </div>
+    </div>
 
-        // Aplica Filtros en Milongas
-        function applyFilters() {
-            const filtered = MILONGAS_DATA.filter(m => {
-                const dayOk = currentDay === 'todos' || m.dia === currentDay;
-                const barrioOk = currentBarrio === 'todos' || m.barrio === currentBarrio;
-                return dayOk && barrioOk;
-            });
-            renderCards(filtered);
-        }
+    <!-- ================= ADMIN: PANEL PRINCIPAL ================= -->
+    <div class="admin-overlay" id="adminPanelOverlay">
+        <div class="admin-box wide">
+            <button class="admin-close" id="adminPanelClose">✕</button>
+            <h2>Panel de control</h2>
+            <p class="sub-admin">Agregá, editá o quitá milongas y clases. Los cambios se guardan en este navegador; usá "Exportar" para llevarlos al archivo del sitio.</p>
 
-        // Aplica Filtros en Clases
-        function applyClasesFilters() {
-            const filtered = CLASES_DATA.filter(c => {
-                const dayOk = currentClaseDay === 'todos' || c.dia === currentClaseDay;
-                const barrioOk = currentClaseBarrio === 'todos' || c.barrio === currentClaseBarrio;
-                return dayOk && barrioOk;
-            });
-            renderClases(filtered);
-        }
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-admin-tab="milongas">Milongas</button>
+                <button class="admin-tab" data-admin-tab="clases">Clases</button>
+                <button class="admin-tab" data-admin-tab="export">Exportar / Restaurar</button>
+            </div>
 
-        // Configurar botones de día para Milongas
-        document.querySelectorAll('#filtersBar .day-chip').forEach(btn => {
-            if (btn.dataset.day === hoyNombre) {
-                btn.setAttribute('aria-pressed', 'true');
-            } else {
-                btn.setAttribute('aria-pressed', 'false');
-            }
+            <!-- TAB: MILONGAS -->
+            <div class="admin-tab-panel" id="adminTabMilongas">
+                <div id="adminMilongaList"></div>
+                <div class="admin-toolbar">
+                    <span></span>
+                    <button class="admin-btn primary small" id="adminAddMilonga">+ Agregar milonga</button>
+                </div>
+                <div class="admin-list" id="adminMilongaListItems"></div>
+            </div>
 
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#filtersBar .day-chip').forEach(b => b.setAttribute('aria-pressed', 'false'));
-                btn.setAttribute('aria-pressed', 'true');
-                currentDay = btn.dataset.day;
-                applyFilters();
-            });
-        });
+            <!-- TAB: CLASES -->
+            <div class="admin-tab-panel" id="adminTabClases" style="display:none;">
+                <div class="admin-toolbar">
+                    <span></span>
+                    <button class="admin-btn primary small" id="adminAddClase">+ Agregar clase</button>
+                </div>
+                <div class="admin-list" id="adminClaseListItems"></div>
+            </div>
 
-        barrioSelect.addEventListener('change', (e) => {
-            currentBarrio = e.target.value;
-            applyFilters();
-        });
+            <!-- TAB: EXPORTAR / RESTAURAR -->
+            <div class="admin-tab-panel admin-export-box" id="adminTabExport" style="display:none;">
+                <p class="sub-admin" style="margin-bottom:14px;">
+                    Los cambios que hacés acá solo se ven en este navegador (quedan guardados localmente). Para que se vean en el sitio para todo el mundo, copiá el código de abajo y reemplazá el bloque correspondiente en el archivo HTML.
+                </p>
+                <div class="admin-form-actions" style="margin-top:0; margin-bottom:12px;">
+                    <button class="admin-btn small" id="adminExportMilongas">Generar código de MILONGAS_DATA</button>
+                    <button class="admin-btn small" id="adminExportClases">Generar código de CLASES_DATA</button>
+                    <button class="admin-btn small danger" id="adminResetAll">Restaurar datos originales</button>
+                    <button class="admin-btn small danger" id="adminLogout">Cerrar sesión</button>
+                </div>
+                <textarea id="adminExportOutput" readonly placeholder="El código generado va a aparecer acá..."></textarea>
+            </div>
+        </div>
+    </div>
 
-        // Configurar botones de día para Clases (Selecciona hoyNombre por defecto)
-        document.querySelectorAll('#clasesFiltersBar .clase-day-chip').forEach(btn => {
-            if (btn.dataset.day === hoyNombre) {
-                btn.setAttribute('aria-pressed', 'true');
-            } else {
-                btn.setAttribute('aria-pressed', 'false');
-            }
+    <!-- ================= ADMIN: FORMULARIO MILONGA ================= -->
+    <div class="admin-overlay" id="adminMilongaFormOverlay">
+        <div class="admin-box">
+            <button class="admin-close" id="adminMilongaFormClose">✕</button>
+            <h2 id="adminMilongaFormTitle">Agregar milonga</h2>
+            <input type="hidden" id="mf_index" value="-1">
+            <div class="admin-field">
+                <label for="mf_nombre">Nombre</label>
+                <input type="text" id="mf_nombre">
+            </div>
+            <div class="admin-row2">
+                <div class="admin-field">
+                    <label for="mf_barrio">Barrio</label>
+                    <input type="text" id="mf_barrio">
+                </div>
+                <div class="admin-field">
+                    <label for="mf_dia">Día</label>
+                    <select id="mf_dia">
+                        <option>Lunes</option>
+                        <option>Martes</option>
+                        <option>Miércoles</option>
+                        <option>Jueves</option>
+                        <option>Viernes</option>
+                        <option>Sábado</option>
+                        <option>Domingo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="admin-row2">
+                <div class="admin-field">
+                    <label for="mf_frecuencia">Frecuencia</label>
+                    <select id="mf_frecuencia">
+                        <option value="semanal">Semanal</option>
+                        <option value="quincenal">Quincenal</option>
+                        <option value="mensual">Mensual</option>
+                        <option value="fecha_unica">Fecha única</option>
+                    </select>
+                </div>
+                <div class="admin-field">
+                    <label for="mf_proximaFecha">Próxima fecha</label>
+                    <input type="date" id="mf_proximaFecha">
+                    <small>Requerida para "fecha única"; opcional para el resto.</small>
+                </div>
+            </div>
+            <div class="admin-field">
+                <label for="mf_horario">Horario</label>
+                <input type="text" id="mf_horario" placeholder="Ej: Desde las 21:00 hs">
+            </div>
+            <div class="admin-field">
+                <label for="mf_direccion">Dirección</label>
+                <input type="text" id="mf_direccion" placeholder="Calle y altura, barrio">
+            </div>
+            <div class="admin-field">
+                <label for="mf_nota">Nota (entrada, orquesta, organizadores, etc.)</label>
+                <textarea id="mf_nota"></textarea>
+            </div>
+            <div class="admin-field">
+                <label for="mf_contacto">WhatsApp (solo números, con código de país)</label>
+                <input type="text" id="mf_contacto" placeholder="Ej: 5491168639389">
+            </div>
+            <div class="admin-form-actions">
+                <button class="admin-btn primary" id="mf_save">Guardar</button>
+                <button class="admin-btn danger" id="mf_delete" style="display:none;">Eliminar</button>
+            </div>
+        </div>
+    </div>
 
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#clasesFiltersBar .clase-day-chip').forEach(b => b.setAttribute('aria-pressed', 'false'));
-                btn.setAttribute('aria-pressed', 'true');
-                currentClaseDay = btn.dataset.day;
-                applyClasesFilters();
-            });
-        });
+    <!-- ================= ADMIN: FORMULARIO CLASE ================= -->
+    <div class="admin-overlay" id="adminClaseFormOverlay">
+        <div class="admin-box">
+            <button class="admin-close" id="adminClaseFormClose">✕</button>
+            <h2 id="adminClaseFormTitle">Agregar clase</h2>
+            <input type="hidden" id="cf_index" value="-1">
+            <div class="admin-field">
+                <label for="cf_nombre">Nombre / Estudio / Profe</label>
+                <input type="text" id="cf_nombre">
+            </div>
+            <div class="admin-row2">
+                <div class="admin-field">
+                    <label for="cf_barrio">Barrio</label>
+                    <input type="text" id="cf_barrio">
+                </div>
+                <div class="admin-field">
+                    <label for="cf_tipo">Tipo (nivel/modalidad)</label>
+                    <input type="text" id="cf_tipo" placeholder="Ej: Iniciados / Grupal">
+                </div>
+            </div>
+            <div class="admin-row2">
+                <div class="admin-field">
+                    <label for="cf_frecuencia">Frecuencia (texto libre)</label>
+                    <input type="text" id="cf_frecuencia" placeholder="Ej: semanal">
+                </div>
+                <div class="admin-field">
+                    <label for="cf_contacto">WhatsApp (solo números)</label>
+                    <input type="text" id="cf_contacto" placeholder="Ej: 5491123387471">
+                </div>
+            </div>
+            <div class="admin-field">
+                <label for="cf_direccion">Dirección</label>
+                <input type="text" id="cf_direccion">
+            </div>
+            <div class="admin-field">
+                <label for="cf_descripcion">Descripción</label>
+                <textarea id="cf_descripcion"></textarea>
+            </div>
+            <div class="admin-field">
+                <label>Horarios</label>
+                <div class="admin-horarios-list" id="cf_horariosList"></div>
+                <button class="admin-btn small" id="cf_addHorario" type="button">+ Agregar horario</button>
+            </div>
+            <div class="admin-form-actions">
+                <button class="admin-btn primary" id="cf_save">Guardar</button>
+                <button class="admin-btn danger" id="cf_delete" style="display:none;">Eliminar</button>
+            </div>
+        </div>
+    </div>
 
-        claseBarrioSelect.addEventListener('change', (e) => {
-            currentClaseBarrio = e.target.value;
-            applyClasesFilters();
-        });
-
-        // Renders Iniciales
-        applyFilters();
-        applyClasesFilters();
-    </script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script src="admin.js"></script>
 
 </body>
 </html>
