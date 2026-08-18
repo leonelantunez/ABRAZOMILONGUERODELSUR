@@ -1,3 +1,620 @@
+ Gemini
+Nuevo chat
+Buscar chats
+Imágenes
+Biblioteca
+Nuevo cuaderno
+ABRAZODELSUR
+CHAMP
+Todos los cuadernos
+Modificar Datos Sin Copiar Pegar
+Actualizar Datos Sin Copiar/Pegar
+Significado de la M en MSPC
+Man Covers Woman's Mouth
+Esquema Eléctrico: Disyuntor y Térmicas
+Fileteado Porteño Website Name Customization
+Fileteado Porteño: Abrazodelsur.com.ar
+Falla Eléctrica: Caloventor y Pava
+Fallo de Transformador y Fusible
+Dynamic Barrios Strip and Classes Data
+Mickey Mouse Costume Photo
+Viaje Buenos Aires Colonia: Miércoles Noche Jueves
+Tipografía Bordada: Abrazodelzur.com.ar
+HTML Animaciones: Opciones y Casos
+Proyector: Tamaño de Imagen a 3 Metros
+Autenticidad de Correo Oficial TAD
+Mapa Histórico en Google Analytics 4
+Instagram Seguidores Con Gafas
+Corrección de Errores JavaScript en Milongas
+Descuentos SUBE en AMBA por Viajes Consecutivos
+Limpieza Industrial de Maquinaria con Vapor
+WNQ07AS: Velocidad de Centrifugado
+Vercel vs. Servidores Continuos
+Solucionar Error de Ejecución PowerShell
+Agregar Pistola a Fotografía de Clase
+Guía Rápida para Empezar con Node.js
+Generar Referencia Visual de Bloques DWG
+Orígenes del Napoli FC
+Opciones de Hosting para tu Dominio
+El destino de Mita tras Independiente
+Calentamiento Global y Frío Extremo
+Conversación con Gemini
+
+revisar estos archivos, que otra manera tengo para que directamente no tenga
+
+que copiar y pegar el codigo html, que se modifique directamente la base
+
+de milongas_data o clases_data
+
+Para modificar directamente los datos de MILONGAS_DATA o CLASES_DATA sin tener que exportar, copiar y pegar manualmente el código JavaScript generado en tu archivo .js o .html, necesitas dejar de depender únicamente del cliente (navegador) e incorporar un almacenamiento centralizado en red.
+
+Actualmente, cuando tu panel modifica la información, guarda los datos en el localStorage del navegador. Esto implica que los cambios solo los ve quien los edita y por eso el sistema te exige la solapa "Exportar / Restaurar" para actualizar los archivos en el servidor.  
+
+A continuación se presentan las alternativas más eficientes ordenadas de la más sencilla a la más avanzada:
+1. BaaS / Base de Datos Serverless (Firebase o Supabase) — La opción más recomendada
+
+Es la forma más rápida y moderna de eliminar el proceso de copiar y pegar sin necesidad de armar un servidor complejo backend.
+
+    Cómo funciona: Reemplazas las constantes locales (MILONGAS_DATA y CLASES_DATA) por lecturas a una base de datos remota como Firebase Firestore o Supabase mediante API keys en tu JavaScript.  
+
+    Flujo de datos:
+
+        Al cargar la página, una llamada fetch() trae los datos en formato JSON directo de la base de datos y renderiza las tarjetas.  
+
+        Al guardar un cambio desde el panel de control oculto, el script actualiza la base de datos remota.  
+
+        Todas las personas que visiten el sitio verán inmediatamente los datos actualizados.
+
+    Ventajas: Es gratuito para volúmenes de tráfico de un proyecto local o directorio cultural, no requiere mantenimiento de servidores y ofrece reglas de seguridad para proteger el guardado.
+
+2. Guardar automáticamente en GitHub mediante GitHub Actions / API
+
+Si tu sitio web está alojado en GitHub Pages, puedes hacer que el panel haga un commit directo al repositorio de forma transparente.
+
+    Cómo funciona: En lugar de mostrar un bloque de texto para copiar, el botón "Guardar" o "Exportar" hace una petición PUT a la API de GitHub usando un Personal Access Token (o invocando un webhook).  
+
+    Flujo de datos:
+
+        Modificas una milonga o clase en el panel de control.  
+
+        El código JavaScript envía el archivo milongas_data.js actualizado a la API de GitHub.
+
+        GitHub actualiza el archivo en el repositorio y la plataforma de hosting (GitHub Pages, Vercel, Netlify) despliega el sitio actualizado automáticamente en 1 o 2 minutos.
+
+3. Backend propio (Node.js / Python / PHP) con base de datos o JSON persistente
+
+Si cuentas con un servidor web tradicional o un hosting con soporte de backend:
+
+    Opción SQLite / MySQL: Creas un servicio en Node.js (Express), Python (Flask/FastAPI) o PHP con endpoints como GET /api/milongas y POST /api/milongas.
+
+    Opción JSON Server: El backend lee y escribe directamente en archivos .json en el disco del servidor cada vez que editas algo desde el panel.
+
+Comparativa de implementación
+Solución	Complejidad	Requiere Servidor	Costo
+Supabase / Firebase	Baja	No (Servicio Serverless)	Gratuito
+GitHub API Commit	Media	No (Integra CI/CD)	Gratuito
+Backend Propio (Node/PHP)	Alta	Sí	Variable
+¿Cuál elegir?
+
+La transición ideal para mantener la simplicidad de tu arquitectura actual (HTML/JS estático) es implementar Supabase o Firebase Firestore: mantendrás tu mismo panel de control, pero las funciones persistMilongas() y persistClases() actualizarán la base de datos en la nube en tiempo real en lugar de escribir solo en el localStorage local.  
+
+tengo el proyecto subido a github,genera las modificaciones en los archivos y dame las instrucciones paso a paso de como configurar github
+
+Para guardar los cambios de Abrazo Milonguero del Sur directamente en tu repositorio de GitHub sin tener que copiar y pegar código ni subir archivos a mano, la mejor alternativa es utilizar la API de GitHub.  
+
+Con este método, cuando hagas clic en "Guardar" o "Exportar", el código JavaScript de tu sitio web enviará automáticamente el archivo milongas_data.js (o .json) actualizado directamente a tu repositorio en GitHub mediante una petición HTTP (PUT).
+
+Si tienes activado GitHub Pages, en 1 o 2 minutos tu sitio web se actualizará para todos los usuarios.
+PASO 1: Crear un Personal Access Token (PAT) en GitHub
+
+Para que tu código tenga permiso de modificar archivos en tu repositorio, necesitas un token de acceso personal.
+
+    Ve a GitHub.com e inicia sesión.
+
+    Haz clic en tu imagen de perfil (arriba a la derecha) y selecciona Settings (Configuración).
+
+    En el menú de la izquierda, baja hasta el final y haz clic en Developer settings.
+
+    Ve a Personal access tokens → Tokens (classic).
+
+    Haz clic en Generate new token → Generate new token (classic).
+
+    Completa los datos:
+
+        Note / Nombre: Token Abrazo Milonguero Panel (o el nombre que prefieras).
+
+        Expiration / Expiración: Elige cuánto tiempo durará (ej. 90 días, 1 año o No expiration).
+
+        Select scopes (Permisos): Marca únicamente la casilla repo (esto da acceso para leer y escribir en tus repositorios).
+
+    Haz clic al final en Generate token.
+
+    ¡COPIA EL TOKEN GENERADO Y GUÁRDALO! (Es un código largo tipo ghp_xxxxxxxxxxxx). No se volverá a mostrar.
+
+PASO 2: Configurar el archivo de variables/configuración (config.js)
+
+Crea un archivo llamado config.js en la raíz de tu proyecto (junto a tu index.html) para guardar las credenciales y la ruta de tu repositorio.
+JavaScript
+
+// config.js
+const GITHUB_CONFIG = {
+  username: "TU_USUARIO_DE_GITHUB", // Cambia por tu usuario de GitHub
+  repo: "NOMBRE_DE_TU_REPOSITTORIO", // Cambia por el nombre de tu repositorio
+  path: "js/milongas_data.js",        // Ruta del archivo a actualizar dentro del repo
+  token: "ghp_TU_PERSONAL_ACCESS_TOKEN" // Pega el token generado en el Paso 1
+};
+
+    ⚠️ Nota importante de seguridad: Si tu repositorio es público, cualquier persona podría ver este token si lo subes directamente. Para repositorios públicos o proyectos personales abiertos, la forma más rápida y segura de no exponer credenciales es mantener el repositorio privado en GitHub o utilizar un campo de texto en tu panel administrativo oculto donde tú mismo ingreses/pegues el token una vez y se guarde en tu navegador (localStorage), sin quemarlo en el archivo.
+
+PASO 3: Modificación del código JavaScript (admin.js o panel de control)
+
+Agrega la siguiente función a tu archivo JavaScript de administración. Esta función se encargará de convertir los datos actuales (MILONGAS_DATA o CLASES_DATA) a Base64 y enviarlos a la API de GitHub para actualizar el archivo.  
+JavaScript
+
+/**
+ * Guarda los datos de MILONGAS_DATA / CLASES_DATA directamente en el repositorio de GitHub.
+ */
+async function guardarEnGitHub() {
+  const statusElement = document.getElementById("github-status");
+  if (statusElement) statusElement.innerText = "Sincronizando con GitHub...";
+
+  try {
+    // 1. Obtener la información del archivo actual en GitHub para conseguir su 'sha'
+    const url = `https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+    
+    const getResponse = await fetch(url, {
+      headers: {
+        "Authorization": `token ${GITHUB_CONFIG.token}`,
+        "Accept": "application/vnd.github.v3+json"
+      }
+    });
+
+    let sha = "";
+    if (getResponse.ok) {
+      const fileData = await getResponse.json();
+      sha = fileData.sha; // Se requiere el sha del archivo actual para poder sobreescribirlo
+    }
+
+    // 2. Generar el contenido del nuevo archivo en formato texto / JavaScript
+    const nuevoContenido = `// Archivo generado automáticamente
+const MILONGAS_DATA = ${JSON.stringify(MILONGAS_DATA, null, 2)};
+const CLASES_DATA = ${JSON.stringify(CLASES_DATA, null, 2)};
+`;
+
+    // 3. Convertir el contenido a Base64 (requerido por la API de GitHub)
+    // Usamos un helper para codificar correctamente caracteres especiales (acentos, 'ñ', etc.)
+    const contentBase64 = btoa(unescape(encodeURIComponent(nuevoContenido)));
+
+    // 4. Enviar la petición PUT a GitHub API
+    const putResponse = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${GITHUB_CONFIG.token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/vnd.github.v3+json"
+      },
+      body: JSON.stringify({
+        message: "Actualización automática de datos desde el Panel de Control",
+        content: contentBase64,
+        sha: sha ? sha : undefined // Si existe se pasa para sobreescribir, sino crea el archivo
+      })
+    });
+
+    if (putResponse.ok) {
+      if (statusElement) {
+        statusElement.style.color = "green";
+        statusElement.innerText = "¡Cambios guardados con éxito en GitHub! Se actualizarán en breve.";
+      }
+      alert("¡Guardado en GitHub correctamente!");
+    } else {
+      const errorData = await putResponse.json();
+      throw new Error(errorData.message || "Error al actualizar en GitHub");
+    }
+
+  } catch (error) {
+    console.error("Error al guardar en GitHub:", error);
+    if (statusElement) {
+      statusElement.style.color = "red";
+      statusElement.innerText = "Error al guardar: " + error.message;
+    }
+    alert("Ocurrió un error al intentar guardar en GitHub: " + error.message);
+  }
+}
+
+PASO 4: Vincular la función al botón en el HTML de tu panel
+
+En el HTML de tu panel de administración o sección oculta, reemplaza o acompaña tu botón actual de "Guardar" o "Exportar" para invocar la nueva función guardarEnGitHub():  
+HTML
+
+<!-- Agrega este botón en tu panel de control -->
+<div class="panel-acciones">
+  <button type="button" onclick="guardarEnGitHub()" class="btn-primary">
+    🚀 Publicar / Guardar en GitHub
+  </button>
+  <span id="github-status" style="margin-left: 10px; font-weight: bold;"></span>
+</div>
+
+<!-- Asegúrate de incluir el archivo config.js antes de tu script de admin -->
+<script src="config.js"></script>
+<script src="js/admin.js"></script>
+
+Flujo de trabajo resultante:
+
+    Entras a tu panel de control como siempre.  
+
+    Creas, editas o eliminas una milonga o clase.  
+
+    Presionas "🚀 Publicar / Guardar en GitHub".
+
+    La función actualiza directamente el archivo en tu repositorio.
+
+    GitHub despliega el cambio y la web muestra la información actualizada a todos los usuarios sin necesidad de que exportes o copies código manualmente.  
+
+por favor, crear o modificar los archivos necesarios
+
+He creado el documento con los archivos necesarios para sincronizar el panel de Abrazo Milonguero del Sur con GitHub.
+
+Archivos Integración GitHub - Abrazo Milonguero del Sur
+Ícono de Documentos de Google
+Archivos Integración GitHub - Abrazo Milonguero del Sur
+ Documentos de Google 
+Resumen del contenido generado en el documento
+
+    config.js
+    Define el usuario de GitHub, el nombre del repositorio y la ruta del archivo a actualizar (js/milongas_data.js).
+
+    js/github_sync.js
+    Contiene la lógica de sincronización:
+
+        Solicita el token de GitHub una única vez y lo guarda de forma segura en localStorage (evitando exponerlo en el código fuente).
+
+        Obtiene la firma SHA más reciente del archivo en GitHub para permitir la sobrescritura.
+
+        Codifica MILONGAS_DATA y CLASES_DATA en formato Base64 respetando la codificación UTF-8 para mantener tildes y caracteres especiales.
+
+        Ejecuta la petición PUT a la API de GitHub para publicar las modificaciones automáticamente.
+
+    Integración HTML (admin.html)
+    Proporciona el botón "🚀 Publicar Cambios en GitHub" e indicadores de estado para incorporarlo directamente en tu panel de administración.
+
+generar nuevamente teniendo en cuenta el nombre del repositorio: ABRAZOMILONGUERODELSUR, nombre de usuario: leonelantunez y token: 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
+
+He actualizado los archivos incorporando los datos de tu repositorio (ABRAZOMILONGUERODELSUR), tu usuario (leonelantunez) y tu token de acceso.
+
+El documento actualizado se encuentra disponible en Google Drive:
+
+Archivos Integración GitHub V2 - ABRAZOMILONGUERODELSUR
+Ícono de Documentos de Google
+Archivos Integración GitHub V2 - ABRAZOMILONGUERODELSUR
+ Documentos de Google 
+Código actualizado para integrar a tu proyecto
+1. Archivo config.js (Crear en la raíz de tu proyecto)
+JavaScript
+
+// config.js
+const GITHUB_CONFIG = {
+  username: "leonelantunez",
+  repo: "ABRAZOMILONGUERODELSUR",
+  path: "js/milongas_data.js",
+  token: "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"
+};
+
+2. Archivo js/github_sync.js (Crear en la carpeta js/)
+JavaScript
+
+/**
+ * Servicio de sincronización automática entre el Panel de Control y GitHub API
+ * Repositorio: leonelantunez/ABRAZOMILONGUERODELSUR
+ */
+
+async function guardarEnGitHub() {
+  const statusElement = document.getElementById("github-status");
+
+  if (statusElement) {
+    statusElement.style.color = "#0056b3";
+    statusElement.innerText = "Sincronizando con GitHub...";
+  }
+
+  try {
+    const url = `https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+    
+    // 1. Obtener la información del archivo actual en GitHub para conseguir su SHA
+    const getResponse = await fetch(url, {
+      headers: {
+        "Authorization": `token ${GITHUB_CONFIG.token}`,
+        "Accept": "application/vnd.github.v3+json"
+      }
+    });
+
+    let sha = "";
+    if (getResponse.ok) {
+      const fileData = await getResponse.json();
+      sha = fileData.sha;
+    }
+
+    // 2. Generar el contenido actualizado a partir de las variables globales MILONGAS_DATA y CLASES_DATA
+    const nuevoContenido = `// Archivo generado automáticamente - Abrazo Milonguero del Sur
+const MILONGAS_DATA = ${JSON.stringify(MILONGAS_DATA, null, 2)};
+
+const CLASES_DATA = ${JSON.stringify(CLASES_DATA, null, 2)};
+`;
+
+    // 3. Convertir a Base64 respetando la codificación UTF-8 (tildes, 'ñ', etc.)
+    const contentBase64 = btoa(unescape(encodeURIComponent(nuevoContenido)));
+
+    // 4. Enviar actualización vía PUT a GitHub
+    const putResponse = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${GITHUB_CONFIG.token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/vnd.github.v3+json"
+      },
+      body: JSON.stringify({
+        message: "Actualización automática de datos desde el Panel de Control",
+        content: contentBase64,
+        sha: sha ? sha : undefined
+      })
+    });
+
+    if (putResponse.ok) {
+      if (statusElement) {
+        statusElement.style.color = "#2ea44f";
+        statusElement.innerText = "¡Guardado con éxito en GitHub! En 1 o 2 minutos se reflejará en el sitio.";
+      }
+      alert("¡Datos actualizados y publicados correctamente en GitHub!");
+    } else {
+      const errorData = await putResponse.json();
+      throw new Error(errorData.message || "Error al actualizar en GitHub");
+    }
+
+  } catch (error) {
+    console.error("Error al guardar en GitHub:", error);
+    if (statusElement) {
+      statusElement.style.color = "#d73a49";
+      statusElement.innerText = "Error: " + error.message;
+    }
+    alert("Ocurrió un error al intentar guardar en GitHub: " + error.message);
+  }
+}
+
+3. Integración en tu panel HTML (admin.html)
+
+Agrega las referencias de los scripts al final de tu archivo HTML y coloca el botón en tu barra de acciones:
+HTML
+
+<!-- Incluir los archivos de configuración y sincronización -->
+<script src="config.js"></script>
+<script src="js/github_sync.js"></script>
+
+<!-- Botón de Sincronización Directa -->
+<div class="github-sync-container" style="margin: 20px 0; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+  <button type="button" onclick="guardarEnGitHub()" style="background-color: #2ea44f; color: #ffffff; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer;">
+    🚀 Publicar Cambios en GitHub
+  </button>
+  <span id="github-status" style="margin-left: 15px; font-weight: bold;"></span>
+</div>
+
+Instrucciones finales de paso a paso
+
+    Agrega los archivos a tu proyecto:
+
+        Guarda config.js en la raíz de tu carpeta.
+
+        Guarda github_sync.js dentro de la carpeta js/.
+
+    Sube estos 2 archivos nuevos a GitHub (por única vez, manualmente o por Git).
+
+    ¡Listo! A partir de ahora, cada vez que edites, agregues o elimines clases o milongas desde tu panel, solo tendrás que hacer clic en "🚀 Publicar Cambios en GitHub" y el archivo js/milongas_data.js de tu repositorio se actualizará automáticamente.
+
+GitHub bloqueó la subida de config.js porque su sistema de Secret Scanning detectó el Personal Access Token escrito directamente en el archivo.
+
+Para resolverlo de forma segura sin exponer credenciales en tu repositorio, actualizaremos la arquitectura para almacenar el token únicamente en el localStorage de tu navegador local.
+PASO 1: Desbloquear o publicar en GitHub
+
+Elige una de estas 2 opciones para continuar en la pantalla de la imagen:
+
+    Opción rápida: En la ventana emergente de GitHub, selecciona la opción "I'll fix it later" y haz clic en Allow Secret. Esto te dejará subir el archivo para salir del paso.
+
+    Opción segura (Recomendada): Elimina la línea del token de config.js antes de hacer el commit.
+
+PASO 2: Código modificado de config.js
+
+Eliminamos el token del código para evitar la alerta de GitHub:
+JavaScript
+
+// config.js
+const GITHUB_CONFIG = {
+  username: "leonelantunez",
+  repo: "ABRAZOMILONGUERODELSUR",
+  path: "js/milongas_data.js",
+  tokenKey: "github_pat_token" // Clave para guardar el token localmente en tu navegador
+};
+
+PASO 3: Código modificado de js/github_sync.js
+
+Este script pedirá el token la primera vez que intentes guardar, lo almacenará en tu navegador de forma persistente y no bloqueará GitHub:
+JavaScript
+
+/**
+ * Servicio de sincronización entre el Panel de Control y GitHub API
+ * Repositorio: leonelantunez/ABRAZOMILONGUERODELSUR
+ */
+
+function obtenerToken() {
+  return localStorage.getItem(GITHUB_CONFIG.tokenKey) || "";
+}
+
+function guardarToken(token) {
+  localStorage.setItem(GITHUB_CONFIG.tokenKey, token);
+}
+
+async function guardarEnGitHub() {
+  const statusElement = document.getElementById("github-status");
+  let token = obtenerToken();
+
+  // Si no hay token guardado en el navegador, se solicita una sola vez
+  if (!token) {
+    token = prompt("Ingresa tu Personal Access Token (PAT) de GitHub:");
+    if (!token) {
+      if (statusElement) statusElement.innerText = "Sincronización cancelada. Se requiere token.";
+      return;
+    }
+    guardarToken(token.trim());
+  }
+
+  if (statusElement) {
+    statusElement.style.color = "#0056b3";
+    statusElement.innerText = "Sincronizando con GitHub...";
+  }
+
+  try {
+    const url = `https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+    
+    // 1. Obtener SHA del archivo actual
+    const getResponse = await fetch(url, {
+      headers: {
+        "Authorization": `token ${token}`,
+        "Accept": "application/vnd.github.v3+json"
+      }
+    });
+
+    let sha = "";
+    if (getResponse.ok) {
+      const fileData = await getResponse.json();
+      sha = fileData.sha;
+    }
+
+    // 2. Generar el contenido JS actualizado
+    const nuevoContenido = `// Archivo generado automáticamente - Abrazo Milonguero del Sur
+const MILONGAS_DATA = ${JSON.stringify(MILONGAS_DATA, null, 2)};
+
+const CLASES_DATA = ${JSON.stringify(CLASES_DATA, null, 2)};
+`;
+
+    // 3. Convertir a Base64 con soporte para tildes y caracteres especiales
+    const contentBase64 = btoa(unescape(encodeURIComponent(nuevoContenido)));
+
+    // 4. Enviar actualización a GitHub
+    const putResponse = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/vnd.github.v3+json"
+      },
+      body: JSON.stringify({
+        message: "Actualización automática de datos desde el Panel de Control",
+        content: contentBase64,
+        sha: sha ? sha : undefined
+      })
+    });
+
+    if (putResponse.ok) {
+      if (statusElement) {
+        statusElement.style.color = "#2ea44f";
+        statusElement.innerText = "¡Guardado con éxito en GitHub! En 1 o 2 minutos se reflejará en el sitio.";
+      }
+      alert("¡Datos actualizados y publicados correctamente en GitHub!");
+    } else {
+      const errorData = await putResponse.json();
+      if (putResponse.status === 401) {
+        localStorage.removeItem(GITHUB_CONFIG.tokenKey); // Borrar token si expiró o es inválido
+      }
+      throw new Error(errorData.message || "Error al actualizar en GitHub");
+    }
+
+  } catch (error) {
+    console.error("Error al guardar en GitHub:", error);
+    if (statusElement) {
+      statusElement.style.color = "#d73a49";
+      statusElement.innerText = "Error: " + error.message;
+    }
+    alert("Ocurrió un error al intentar guardar en GitHub: " + error.message);
+  }
+}
+
+verificar funcionamiento. porque todavia siguen los botones de exportar/restaurar ?
+
+Los botones de Exportar / Restaurar todavía aparecen en el código HTML porque corresponden a la pestaña "Exportar / Restaurar" del Panel de Administración (líneas 546 y 584-593 de tu archivo index.html), el cual se activa mediante el botón oculto en el footer.
+
+Sin embargo, dado que ya implementamos el sistema de sincronización directa y automática con GitHub API (vía js/github_sync.js), esos botones de copia manual ya no son necesarios.
+¿Por qué mantenerlos o quitarlos?
+
+    Si mantienes la pestaña: Servirá como un plan de respaldo (backup) por si en algún momento deseas copiar manualmente la estructura JSON limpia sin interactuar con la API.
+
+    Si deseas reemplazarlos por el guardado automático: Debes sustituir el bloque del panel con la llamada a la función guardarEnGitHub().
+
+Cómo integrar la Sincronización Automática en el HTML
+
+Para reemplazar el proceso de exportación manual por el Guardado Directo en GitHub, realiza los siguientes cambios en tu archivo index.html:
+1. Vincular los scripts necesarios
+
+Asegúrate de importar config.js y github_sync.js antes del cierre de la etiqueta </body>:
+HTML
+
+    <script src="js/milongas_data.js"></script>
+    <script src="config.js"></script>
+    <script src="js/github_sync.js"></script>
+    <script src="app.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+2. Actualizar la interfaz del Panel de Control en index.html
+
+Reemplaza la sección del contenedor <div class="admin-tab-panel admin-export-box" id="adminTabExport"> por el siguiente bloque con el botón de publicación automática:
+HTML
+
+<!-- TAB: PUBLICAR EN GITHUB -->
+<div class="admin-tab-panel admin-export-box" id="adminTabExport" style="display:none;">
+    <p class="sub-admin" style="margin-bottom:14px;">
+        Los cambios realizados se guardan localmente en tu navegador. Presiona el siguiente botón para sincronizarlos y publicarlos automáticamente en GitHub.
+    </p>
+    
+    <div style="margin-bottom: 16px;">
+        <button class="admin-btn primary" onclick="guardarEnGitHub()">🚀 Publicar cambios en GitHub</button>
+        <span id="github-status" style="margin-left: 12px; font-weight: 500; font-size: 13.5px;"></span>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid var(--line); margin: 20px 0;">
+
+    <p class="sub-admin" style="margin-bottom:10px;">Opciones secundarias:</p>
+    <div class="admin-form-actions" style="margin-top:0;">
+        <button class="admin-btn small danger" id="adminResetAll">Restaurar datos locales originales</button>
+        <button class="admin-btn small danger" id="adminLogout">Cerrar sesión</button>
+    </div>
+</div>
+
+¿Cómo funciona la verificación de la solución?
+
+    Entra al sitio, abre el Panel de Administración e ingresa una modificación (por ejemplo, agrega o edita una milonga).
+
+    Ve a la pestaña Publicar en GitHub y haz clic en 🚀 Publicar cambios en GitHub.
+
+    El script solicitará tu Personal Access Token la primera vez y lo guardará en localStorage.
+
+    Una vez procesado, la API de GitHub actualizará directamente el archivo js/milongas_data.js en tu repositorio, prescindiendo del copiado y pegado manual de código.
+
+entonces generar un archivo index con todo lo que yo necesito
+
+He generado el documento con el código completo y actualizado de tu archivo index.html, integrando la interfaz de publicación automática a GitHub y manteniendo toda la estructura, Google Analytics, estilos CSS, scripts y componentes de tu sitio.
+
+index.html - Abrazo Milonguero del Sur
+Ícono de Documentos de Google
+index.html - Abrazo Milonguero del Sur
+ Documentos de Google 
+
+por favor que sea .html
+
+He generado el documento HTML solicitado.
+Ícono de HTML
+index
+ HTML 
+
+
+Gemini es una IA y puede cometer errores.
+Analizando
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -530,7 +1147,6 @@
             font-style: italic;
         }
 
-        /* Estilos de la lista de horarios en clases */
         .horarios-list {
             margin: 4px 0 8px;
             display: flex;
@@ -908,18 +1524,6 @@
         }
 
         .admin-form-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-
-        .admin-export-box textarea {
-            width: 100%;
-            min-height: 260px;
-            background: var(--night);
-            color: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 12px;
-            padding: 12px;
-        }
     </style>
 </head>
 <body>
@@ -1145,12 +1749,12 @@
         <div class="admin-box wide">
             <button class="admin-close" id="adminPanelClose">✕</button>
             <h2>Panel de control</h2>
-            <p class="sub-admin">Agregá, editá o quitá milongas y clases. Los cambios se guardan en este navegador; usá "Exportar" para llevarlos al archivo del sitio.</p>
+            <p class="sub-admin">Agregá, editá o quitá milongas y clases. Usá la pestaña "Publicar en GitHub" para sincronizar tus cambios directamente con la web.</p>
 
             <div class="admin-tabs">
                 <button class="admin-tab active" data-admin-tab="milongas">Milongas</button>
                 <button class="admin-tab" data-admin-tab="clases">Clases</button>
-                <button class="admin-tab" data-admin-tab="export">Exportar / Restaurar</button>
+                <button class="admin-tab" data-admin-tab="export">Publicar en GitHub</button>
             </div>
 
             <!-- TAB: MILONGAS -->
@@ -1172,18 +1776,24 @@
                 <div class="admin-list" id="adminClaseListItems"></div>
             </div>
 
-            <!-- TAB: EXPORTAR / RESTAURAR -->
-            <div class="admin-tab-panel admin-export-box" id="adminTabExport" style="display:none;">
+            <!-- TAB: PUBLICAR EN GITHUB -->
+            <div class="admin-tab-panel" id="adminTabExport" style="display:none;">
                 <p class="sub-admin" style="margin-bottom:14px;">
-                    Los cambios que hacés acá solo se ven en este navegador (quedan guardados localmente). Para que se vean en el sitio para todo el mundo, copiá el código de abajo y reemplazá el bloque correspondiente en el archivo HTML.
+                    Los cambios realizados se guardan localmente en tu navegador. Presiona el siguiente botón para sincronizarlos y publicarlos automáticamente en GitHub.
                 </p>
-                <div class="admin-form-actions" style="margin-top:0; margin-bottom:12px;">
-                    <button class="admin-btn small" id="adminExportMilongas">Generar código de MILONGAS_DATA</button>
-                    <button class="admin-btn small" id="adminExportClases">Generar código de CLASES_DATA</button>
-                    <button class="admin-btn small danger" id="adminResetAll">Restaurar datos originales</button>
+                
+                <div style="margin-bottom: 20px;">
+                    <button class="admin-btn primary" onclick="guardarEnGitHub()">🚀 Publicar cambios en GitHub</button>
+                    <span id="github-status" style="margin-left: 12px; font-weight: 500; font-size: 13.5px;"></span>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--line); margin: 20px 0;">
+
+                <p class="sub-admin" style="margin-bottom:10px;">Opciones secundarias:</p>
+                <div class="admin-form-actions" style="margin-top:0;">
+                    <button class="admin-btn small danger" id="adminResetAll">Restaurar datos locales originales</button>
                     <button class="admin-btn small danger" id="adminLogout">Cerrar sesión</button>
                 </div>
-                <textarea id="adminExportOutput" readonly placeholder="El código generado va a aparecer acá..."></textarea>
             </div>
         </div>
     </div>
@@ -1305,9 +1915,15 @@
         </div>
     </div>
 
-    <script src="data.js"></script>
+    <!-- SCRIPTS DE LA APLICACIÓN -->
+    <script src="js/milongas_data.js"></script>
+    <script src="config.js"></script>
+    <script src="js/github_sync.js"></script>
     <script src="app.js"></script>
     <script src="admin.js"></script>
 
 </body>
 </html>
+
+index.html
+Mostrando index.html.
