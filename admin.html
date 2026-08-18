@@ -1,0 +1,11 @@
+<!-- Incluir la configuración y la lógica de sincronización antes de cerrar el <body> -->
+<script src="config.js"></script>
+<script src="js/github_sync.js"></script>
+
+<!-- Botón de Sincronización Directa -->
+<div class="github-sync-container" style="margin: 20px 0; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+  <button type="button" onclick="guardarEnGitHub()" style="background-color: #2ea44f; color: #ffffff; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer;">
+    🚀 Publicar Cambios en GitHub
+  </button>
+  <span id="github-status" style="margin-left: 15px; font-weight: bold;"></span>
+</div>
